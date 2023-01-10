@@ -41,3 +41,11 @@ func SpiffeSocketUrl() string {
 	}
 	return p
 }
+
+func SafeEndpointUrl() string {
+	u := os.Getenv("AEGIS_SAFE_ENDPOINT_URL")
+	if u == "" {
+		u = "https://aegis-safe.aegis-system.svc.cluster.local:8443/"
+	}
+	return u
+}
