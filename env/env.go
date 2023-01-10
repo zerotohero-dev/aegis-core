@@ -33,3 +33,11 @@ func WorkloadSvidPrefix() string {
 	}
 	return p
 }
+
+func SpiffeSocketUrl() string {
+	p := os.Getenv("SPIFFE_ENDPOINT_SOCKET")
+	if p == "" {
+		p = "unix:///spire-agent-socket/agent.sock"
+	}
+	return p
+}
