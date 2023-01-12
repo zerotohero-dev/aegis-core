@@ -10,6 +10,11 @@ package env
 
 import "os"
 
+// SentinelSvidPrefix returns the prefix for the Safe
+// SVID (Short-lived Verifiable Identity Document) used in the Aegis system.
+// The prefix is obtained from the environment variable
+// AEGIS_SENTINEL_SVID_PREFIX. If the variable is not set, the default prefix is
+// used.
 func SentinelSvidPrefix() string {
 	p := os.Getenv("AEGIS_SENTINEL_SVID_PREFIX")
 	if p == "" {
@@ -18,6 +23,11 @@ func SentinelSvidPrefix() string {
 	return p
 }
 
+// SafeSvidPrefix returns the prefix for the Safe
+// SVID (Short-lived Verifiable Identity Document) used in the Aegis system.
+// The prefix is obtained from the environment variable
+// AEGIS_SAFE_SVID_PREFIX. If the variable is not set, the default prefix is
+// used.
 func SafeSvidPrefix() string {
 	p := os.Getenv("AEGIS_SAFE_SVID_PREFIX")
 	if p == "" {
@@ -26,6 +36,10 @@ func SafeSvidPrefix() string {
 	return p
 }
 
+// WorkloadSvidPrefix returns the prefix for the Workload SVID
+// (SPIFFE Verifiable Identity Document) used in the Aegis system.
+// The prefix is obtained from the environment variable AEGIS_WORKLOAD_SVID_PREFIX.
+// If the variable is not set, the default prefix is used.
 func WorkloadSvidPrefix() string {
 	p := os.Getenv("AEGIS_WORKLOAD_SVID_PREFIX")
 	if p == "" {
@@ -34,6 +48,10 @@ func WorkloadSvidPrefix() string {
 	return p
 }
 
+// SpiffeSocketUrl returns the URL for the SPIFFE endpoint socket used in the
+// Aegis system.
+// The URL is obtained from the environment variable SPIFFE_ENDPOINT_SOCKET.
+// If the variable is not set, the default URL is used.
 func SpiffeSocketUrl() string {
 	p := os.Getenv("SPIFFE_ENDPOINT_SOCKET")
 	if p == "" {
@@ -42,6 +60,9 @@ func SpiffeSocketUrl() string {
 	return p
 }
 
+// SafeEndpointUrl returns the URL for the Safe endpoint used in the Aegis system.
+// The URL is obtained from the environment variable AEGIS_SAFE_ENDPOINT_URL.
+// If the variable is not set, the default URL is used.
 func SafeEndpointUrl() string {
 	u := os.Getenv("AEGIS_SAFE_ENDPOINT_URL")
 	if u == "" {
