@@ -74,7 +74,7 @@ func SafeEndpointUrl() string {
 func ProbeLivenessPort() string {
 	u := os.Getenv("AEGIS_PROBE_LIVENESS_PORT")
 	if u == "" {
-		u = ":8080"
+		u = ":8081"
 	}
 	return u
 }
@@ -82,7 +82,7 @@ func ProbeLivenessPort() string {
 func ProbeReadinessPort() string {
 	u := os.Getenv("AEGIS_PROBE_LIVENESS_PORT")
 	if u == "" {
-		u = ":8081"
+		u = ":8082"
 	}
 	return u
 }
