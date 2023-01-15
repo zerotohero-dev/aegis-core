@@ -24,15 +24,19 @@ func ok(w http.ResponseWriter, req *http.Request) {
 }
 
 func CreateLiveness() {
-	http.HandleFunc("/healthz", ok)
+	mux := http.NewServeMux()
+	http.HandleFunc("/", ok)
+	err := http.ListenAndServe(env.ProbeLivenessPort(), mux)
+	if err != nil {
+		log.Fatalf("error creating liveness probe: %s", err.Error())
+		return
+	}
 }
 
 func CreateReadiness() {
-	http.HandleFunc("/readyz", ok)
-}
-
-func Listen() {
-	err := http.ListenAndServe(env.ProbeServerPort(), nil)
+	mux := http.NewServeMux()
+	http.HandleFunc("/", ok)
+	err := http.ListenAndServe(env.ProbeReadinessPort(), mux)
 	if err != nil {
 		log.Fatalf("error creating readiness probe: %s", err.Error())
 		return
