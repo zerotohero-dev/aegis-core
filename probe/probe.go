@@ -10,7 +10,6 @@ package probe
 
 import (
 	"fmt"
-	"github.com/zerotohero-dev/aegis-core/env"
 	"log"
 	"net/http"
 )
@@ -25,8 +24,8 @@ func ok(w http.ResponseWriter, req *http.Request) {
 
 func CreateLiveness() {
 	mux := http.NewServeMux()
-	http.HandleFunc("/", ok)
-	err := http.ListenAndServe(env.ProbeLivenessPort(), mux)
+	mux.HandleFunc("/", ok)
+	err := http.ListenAndServe(":8081", mux)
 	if err != nil {
 		log.Fatalf("error creating liveness probe: %s", err.Error())
 		return
@@ -35,8 +34,8 @@ func CreateLiveness() {
 
 func CreateReadiness() {
 	mux := http.NewServeMux()
-	http.HandleFunc("/", ok)
-	err := http.ListenAndServe(env.ProbeReadinessPort(), mux)
+	mux.HandleFunc("/", ok)
+	err := http.ListenAndServe(":8082", mux)
 	if err != nil {
 		log.Fatalf("error creating readiness probe: %s", err.Error())
 		return
