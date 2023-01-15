@@ -80,7 +80,7 @@ func ProbeLivenessPort() string {
 }
 
 func ProbeReadinessPort() string {
-	u := os.Getenv("AEGIS_PROBE_LIVENESS_PORT")
+	u := os.Getenv("AEGIS_PROBE_READINESS_PORT")
 	if u == "" {
 		u = ":8082"
 	}
