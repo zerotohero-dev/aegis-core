@@ -123,3 +123,20 @@ func SentryPollInterval() time.Duration {
 	}
 	return time.Duration(i) * time.Second
 }
+
+// SafeSvidRetrievalTimeout returns the allowed time for Aegis Safe to wait
+// before killing the pod to retrieve an SVID, in time.Duration.
+// The interval is determined by the AEGIS_SAFE_SVID_RETRIEVAL_TIMEOUT environment
+// variable, with a default value of 30 seconds if the variable is not set or
+// if there is an error in parsing the value.
+func SafeSvidRetrievalTimeout() time.Duration {
+	p := os.Getenv("AEGIS_SAFE_SVID_RETRIEVAL_TIMEOUT")
+	if p == "" {
+		p = "30"
+	}
+	i, err := strconv.ParseInt(p, 10, 32)
+	if err != nil {
+		return 20 * time.Second
+	}
+	return time.Duration(i) * time.Second
+}
