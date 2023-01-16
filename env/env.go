@@ -8,7 +8,11 @@
 
 package env
 
-import "os"
+import (
+	"os"
+	"strconv"
+	"time"
+)
 
 // SentinelSvidPrefix returns the prefix for the Safe
 // SVID (Short-lived Verifiable Identity Document) used in the Aegis system.
@@ -102,4 +106,20 @@ func SidecarSecretsPath() string {
 		p = "/opt/aegis/secrets.json"
 	}
 	return p
+}
+
+// SentryPollInterval returns the polling interval for sentry in time.Duration
+// The interval is determined by the AEGIS_SIDECAR_POLL_INTERVAL environment
+// variable, with a default value of 20 seconds if the variable is not set or
+// if there is an error in parsing the value.
+func SentryPollInterval() time.Duration {
+	p := os.Getenv("AEGIS_SIDECAR_POLL_INTERVAL")
+	if p == "" {
+		p = "20"
+	}
+	i, err := strconv.ParseInt(p, 10, 32)
+	if err != nil {
+		return 20 * time.Second
+	}
+	return time.Duration(i) * time.Second
 }
