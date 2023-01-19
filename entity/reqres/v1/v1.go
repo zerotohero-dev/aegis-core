@@ -8,6 +8,10 @@
 
 package v1
 
+import (
+	"github.com/zerotohero-dev/aegis-core/entity/data/v1"
+)
+
 type SecretUpsertRequest struct {
 	WorkloadId string `json:"key"`
 	Value      string `json:"value"`
@@ -23,8 +27,18 @@ type SecretFetchRequest struct {
 }
 
 type SecretFetchResponse struct {
-	Data string `json:"data"`
-	Err  string `json:"err,omitempty"`
+	Data        string      `json:"data"`
+	LastUpdated v1.JsonTime `json:"lastUpdated"`
+	Err         string      `json:"err,omitempty"`
+}
+
+type SecretListRequest struct {
+	Err string `json:"err,omitempty"`
+}
+
+type SecretListResponse struct {
+	Secrets []v1.Secret `json:"secrets"`
+	Err     string      `json:"err,omitempty"`
 }
 
 type GenericRequest struct {
