@@ -16,7 +16,7 @@ import (
 type JsonTime time.Time
 
 func (t JsonTime) MarshalJSON() ([]byte, error) {
-	stamp := fmt.Sprintf("\"%s\"", time.Time(t).Format("Mon Jan _2"))
+	stamp := fmt.Sprintf("\"%s\"", time.Time(t).Format(time.RubyDate))
 	return []byte(stamp), nil
 }
 
