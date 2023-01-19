@@ -27,9 +27,10 @@ type SecretFetchRequest struct {
 }
 
 type SecretFetchResponse struct {
-	Data        string      `json:"data"`
-	LastUpdated v1.JsonTime `json:"lastUpdated"`
-	Err         string      `json:"err,omitempty"`
+	Data    string      `json:"data"`
+	Created v1.JsonTime `json:"created"`
+	Updated v1.JsonTime `json:"updated"`
+	Err     string      `json:"err,omitempty"`
 }
 
 type SecretListRequest struct {
