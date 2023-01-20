@@ -151,3 +151,25 @@ func SafeTlsPort() string {
 	}
 	return p
 }
+
+// SafeDataPath returns the path to the safe data directory.
+// The path is determined by the AEGIS_SAFE_DATA_PATH environment variable.
+// If the environment variable is not set, the default path "/data" is returned.
+func SafeDataPath() string {
+	p := os.Getenv("AEGIS_SAFE_DATA_PATH")
+	if p == "" {
+		p = "/data"
+	}
+	return p
+}
+
+// SafeAgeKeyPath returns the path to the safe age key directory.
+// The path is determined by the AEGIS_SAFE_AGE_KEY_PATH environment variable.
+// If the environment variable is not set, the default path "/key" is returned.
+func SafeAgeKeyPath() string {
+	p := os.Getenv("AEGIS_SAFE_AGE_KEY_PATH")
+	if p == "" {
+		p = "/key"
+	}
+	return p
+}
