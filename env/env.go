@@ -165,11 +165,12 @@ func SafeDataPath() string {
 
 // SafeAgeKeyPath returns the path to the safe age key directory.
 // The path is determined by the AEGIS_SAFE_AGE_KEY_PATH environment variable.
-// If the environment variable is not set, the default path "/key" is returned.
+// If the environment variable is not set, the default path "/key/key.txt"
+// is returned.
 func SafeAgeKeyPath() string {
 	p := os.Getenv("AEGIS_SAFE_AGE_KEY_PATH")
 	if p == "" {
-		p = "/key"
+		p = "/key/key.txt"
 	}
 	return p
 }
