@@ -194,7 +194,3 @@ func SafeLogLevel() int {
 	}
 	return l
 }
-
-
-- name: AEGIS_SAFE_LOG_LEVEL
-value: "6"
