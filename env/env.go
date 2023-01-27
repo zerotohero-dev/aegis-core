@@ -230,3 +230,18 @@ func SafeBackingStoreType() string {
 	}
 	return s
 }
+
+// SafeSecretBackupCount retrieves the number of backups to keep for Aegis Safe
+// secrets. If the environment variable AEGIS_SAFE_SECRET_BACKUP_COUNT is not
+// set or is not a valid integer, the default value of 3 will be returned.
+func SafeSecretBackupCount() int {
+	p := os.Getenv("AEGIS_SAFE_SECRET_BACKUP_COUNT")
+	if p == "" {
+		return 3
+	}
+	l, err := strconv.Atoi(p)
+	if err != nil {
+		return 3
+	}
+	return l
+}
