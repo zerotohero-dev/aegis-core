@@ -195,3 +195,25 @@ func SafeLogLevel() int {
 	}
 	return l
 }
+
+// SafeSecretBufferSize returns the buffer size for the Aegis Safe secret queue.
+//
+// The buffer size is determined by the environment variable
+// AEGIS_SAFE_SECRET_BUFFER_SIZE.
+//
+// If the environment variable is not set, the default buffer size is 10.
+// If the environment variable is set and can be parsed as an integer,
+// it will be used as the buffer size.
+// If the environment variable is set but cannot be parsed as an integer,
+// the default buffer size is used.
+func SafeSecretBufferSize() int {
+	p := os.Getenv("AEGIS_SAFE_SECRET_BUFFER_SIZE")
+	if p == "" {
+		return 10
+	}
+	l, err := strconv.Atoi(p)
+	if err != nil {
+		return 10
+	}
+	return l
+}
