@@ -217,3 +217,16 @@ func SafeSecretBufferSize() int {
 	}
 	return l
 }
+
+// SafeBackingStoreType returns the storage type for the data,
+// as specified in the AEGIS_SAFE_BACKING_STORE_TYPE environment variable.
+// If the environment variable is not set, it defaults to "persistent".
+// Any value that is not "persistent" will mean Aegis Safe will store
+// its state in-memory
+func SafeBackingStoreType() string {
+	s := os.Getenv("AEGIS_SAFE_BACKING_STORE")
+	if s == "" {
+		return "persistent"
+	}
+	return s
+}
