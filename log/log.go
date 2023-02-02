@@ -23,7 +23,7 @@ const Info Level = 4
 const Debug Level = 5
 const Trace Level = 6
 
-var currentLevel = Level(env.SafeLogLevel())
+var currentLevel = Level(env.LogLevel())
 var mux sync.Mutex
 
 func SetLevel(l Level) {
