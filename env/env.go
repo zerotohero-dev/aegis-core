@@ -108,37 +108,37 @@ func SidecarSecretsPath() string {
 	return p
 }
 
-// SentryPollInterval returns the polling interval for sentry in time.Duration
+// SidecarPollInterval returns the polling interval for sentry in time.Duration
 // The interval is determined by the AEGIS_SIDECAR_POLL_INTERVAL environment
-// variable, with a default value of 20 seconds if the variable is not set or
-// if there is an error in parsing the value.
-func SentryPollInterval() time.Duration {
+// variable, with a default value of 20000 milliseconds if the variable is not
+// set or if there is an error in parsing the value.
+func SidecarPollInterval() time.Duration {
 	p := os.Getenv("AEGIS_SIDECAR_POLL_INTERVAL")
 	if p == "" {
-		p = "20"
+		p = "20000"
 	}
 	i, err := strconv.ParseInt(p, 10, 32)
 	if err != nil {
-		return 20 * time.Second
+		return 20000 * time.Millisecond
 	}
-	return time.Duration(i) * time.Second
+	return time.Duration(i) * time.Millisecond
 }
 
 // SafeSvidRetrievalTimeout returns the allowed time for Aegis Safe to wait
 // before killing the pod to retrieve an SVID, in time.Duration.
 // The interval is determined by the AEGIS_SAFE_SVID_RETRIEVAL_TIMEOUT environment
-// variable, with a default value of 30 seconds if the variable is not set or
-// if there is an error in parsing the value.
+// variable, with a default value of 30000 milliseconds if the variable is not
+// set or if there is an error in parsing the value.
 func SafeSvidRetrievalTimeout() time.Duration {
 	p := os.Getenv("AEGIS_SAFE_SVID_RETRIEVAL_TIMEOUT")
 	if p == "" {
-		p = "30"
+		p = "30000"
 	}
 	i, err := strconv.ParseInt(p, 10, 32)
 	if err != nil {
-		return 20 * time.Second
+		return 30000 * time.Millisecond
 	}
-	return time.Duration(i) * time.Second
+	return time.Duration(i) * time.Millisecond
 }
 
 // SafeTlsPort returns the secure port for Aegis Safe to listen on.
@@ -244,4 +244,65 @@ func SafeSecretBackupCount() int {
 		return 3
 	}
 	return l
+}
+
+// SidecarMaxPollInterval returns the maximum interval for polling by the
+// sidecar process. The value is read from the environment variable
+// `AEGIS_SIDECAR_MAX_POLL_INTERVAL` or returns 300000 milliseconds as default.
+func SidecarMaxPollInterval() time.Duration {
+	p := os.Getenv("AEGIS_SIDECAR_MAX_POLL_INTERVAL")
+	if p == "" {
+		p = "300000"
+	}
+	i, err := strconv.ParseInt(p, 10, 32)
+	if err != nil {
+		return 300000 * time.Millisecond
+	}
+	return time.Duration(i) * time.Millisecond
+}
+
+// SidecarExponentialBackoffMultiplier returns the multiplier for exponential
+// backoff by the sidecar process.
+// The value is read from the environment variable
+// `AEGIS_SIDECAR_EXPONENTIAL_BACKOFF_MULTIPLIER` or returns 2 as default.
+func SidecarExponentialBackoffMultiplier() int64 {
+	p := os.Getenv("AEGIS_SIDECAR_EXPONENTIAL_BACKOFF_MULTIPLIER")
+	if p == "" {
+		p = "2"
+	}
+	i, err := strconv.ParseInt(p, 10, 32)
+	if err != nil {
+		return 2
+	}
+	return i
+}
+
+// SidecarSuccessThreshold returns the number of consecutive successful
+// polls before reducing the interval. The value is read from the environment
+// variable `AEGIS_SIDECAR_SUCCESS_THRESHOLD` or returns 3 as default.
+func SidecarSuccessThreshold() int64 {
+	p := os.Getenv("AEGIS_SIDECAR_SUCCESS_THRESHOLD")
+	if p == "" {
+		p = "3"
+	}
+	i, err := strconv.ParseInt(p, 10, 32)
+	if err != nil {
+		return 3
+	}
+	return i
+}
+
+// SidecarErrorThreshold returns the number of consecutive failed polls
+// before increasing the interval. The value is read from the environment
+// variable `AEGIS_SIDECAR_ERROR_THRESHOLD` or returns 2 as default.
+func SidecarErrorThreshold() int64 {
+	p := os.Getenv("AEGIS_SIDECAR_ERROR_THRESHOLD")
+	if p == "" {
+		p = "2"
+	}
+	i, err := strconv.ParseInt(p, 10, 32)
+	if err != nil {
+		return 2
+	}
+	return i
 }
