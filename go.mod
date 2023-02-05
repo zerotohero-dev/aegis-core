@@ -1,3 +1,3 @@
 module github.com/zerotohero-dev/aegis-core
 
-go 1.19
+go 1.20
