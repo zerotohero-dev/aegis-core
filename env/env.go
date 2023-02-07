@@ -141,11 +141,11 @@ func SafeSvidRetrievalTimeout() time.Duration {
 	return time.Duration(i) * time.Millisecond
 }
 
-// SafeTlsPort returns the secure port for Aegis Safe to listen on.
-// It checks the AEGIS_SAFE_TLS_PORT environment variable. If the variable
+// TlsPort returns the secure port for Aegis Safe to listen on.
+// It checks the AEGIS_TLS_PORT environment variable. If the variable
 // is not set, it defaults to ":8443".
-func SafeTlsPort() string {
-	p := os.Getenv("AEGIS_SAFE_TLS_PORT")
+func TlsPort() string {
+	p := os.Getenv("AEGIS_TLS_PORT")
 	if p == "" {
 		p = ":8443"
 	}
