@@ -40,6 +40,18 @@ func SafeSvidPrefix() string {
 	return p
 }
 
+// NotarySvidPrefix returns the prefix for the Aegis Notary SVID
+// (SPIFFE Verifiable Identity Document) used in the Aegis system.
+// The prefix is obtained from the environment variable AEGIS_NOTARY_SVID_PREFIX.
+// If the variable is not set, the default prefix is used.
+func NotarySvidPrefix() string {
+	p := os.Getenv("AEGIS_NOTARY_SVID_PREFIX")
+	if p == "" {
+		p = "spiffe://aegis.z2h.dev/workload/aegis-notary/ns/aegis-system/sa/aegis-notary/n/"
+	}
+	return p
+}
+
 // WorkloadSvidPrefix returns the prefix for the Workload SVID
 // (SPIFFE Verifiable Identity Document) used in the Aegis system.
 // The prefix is obtained from the environment variable AEGIS_WORKLOAD_SVID_PREFIX.
@@ -53,9 +65,8 @@ func WorkloadSvidPrefix() string {
 }
 
 // SpiffeSocketUrl returns the URL for the SPIFFE endpoint socket used in the
-// Aegis system.
-// The URL is obtained from the environment variable SPIFFE_ENDPOINT_SOCKET.
-// If the variable is not set, the default URL is used.
+// Aegis system. The URL is obtained from the environment variable
+// SPIFFE_ENDPOINT_SOCKET. If the variable is not set, the default URL is used.
 func SpiffeSocketUrl() string {
 	p := os.Getenv("SPIFFE_ENDPOINT_SOCKET")
 	if p == "" {
