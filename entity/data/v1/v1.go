@@ -37,6 +37,8 @@ type SecretMeta struct {
 	UseKubernetesSecret bool `json:"k8s"`
 	// Overrides Env.SafeBackingStoreType()
 	BackingStore BackingStore `json:"storage"`
+	// Defaults to "aegis-system"
+	Namespace string `json:"namespace"`
 }
 
 type SecretStored struct {
