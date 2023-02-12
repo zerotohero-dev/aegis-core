@@ -28,7 +28,7 @@ type Secret struct {
 
 type BackingStore string
 
-var Disk BackingStore = "disk"
+var File BackingStore = "file"
 var Memory BackingStore = "memory"
 var Cluster BackingStore = "cluster"
 

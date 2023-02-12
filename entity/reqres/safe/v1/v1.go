@@ -9,13 +9,15 @@
 package v1
 
 import (
-	"github.com/zerotohero-dev/aegis-core/entity/data/v1"
+	data "github.com/zerotohero-dev/aegis-core/entity/data/v1"
 )
 
 type SecretUpsertRequest struct {
-	WorkloadId string `json:"key"`
-	Value      string `json:"value"`
-	Err        string `json:"err,omitempty"`
+	WorkloadId    string            `json:"key"`
+	BackingStore  data.BackingStore `json:"backingStore"`
+	UseKubernetes bool              `json:"useKubernetes"`
+	Value         string            `json:"value"`
+	Err           string            `json:"err,omitempty"`
 }
 
 type SecretUpsertResponse struct {
@@ -38,8 +40,8 @@ type SecretListRequest struct {
 }
 
 type SecretListResponse struct {
-	Secrets []v1.Secret `json:"secrets"`
-	Err     string      `json:"err,omitempty"`
+	Secrets []data.Secret `json:"secrets"`
+	Err     string        `json:"err,omitempty"`
 }
 
 type GenericRequest struct {
