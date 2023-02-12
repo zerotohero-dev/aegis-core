@@ -16,6 +16,7 @@ type SecretUpsertRequest struct {
 	WorkloadId    string            `json:"key"`
 	BackingStore  data.BackingStore `json:"backingStore"`
 	UseKubernetes bool              `json:"useKubernetes"`
+	Namespace     string            `json:"namespace"`
 	Value         string            `json:"value"`
 	Err           string            `json:"err,omitempty"`
 }
