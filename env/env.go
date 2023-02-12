@@ -9,6 +9,7 @@
 package env
 
 import (
+	data "github.com/zerotohero-dev/aegis-core/entity/data/v1"
 	"os"
 	"strconv"
 	"strings"
@@ -241,17 +242,26 @@ func SafeSecretBufferSize() int {
 	return l
 }
 
-// SafeBackingStoreType returns the storage type for the data,
+// SafeBackingStore returns the storage type for the data,
 // as specified in the AEGIS_SAFE_BACKING_STORE_TYPE environment variable.
 // If the environment variable is not set, it defaults to "persistent".
 // Any value that is not "persistent" will mean Aegis Safe will store
 // its state in-memory
-func SafeBackingStoreType() string {
+func SafeBackingStore() data.BackingStore {
 	s := os.Getenv("AEGIS_SAFE_BACKING_STORE")
 	if s == "" {
-		return "persistent"
+		return data.File
 	}
-	return s
+
+	if data.BackingStore(s) == data.Memory {
+		return data.Memory
+	}
+
+	if data.BackingStore(s) == data.Cluster {
+		return data.Cluster
+	}
+
+	return data.File
 }
 
 // SafeUseKubernetesSecrets returns a boolean indicating whether to create a
@@ -261,10 +271,10 @@ func SafeBackingStoreType() string {
 // 1. By design, and for security the original kubernetes `Secret` should exist,
 // and it should be initiated to a default data as follows:
 //
-//     data:
-//       # '{}' (e30=) is a special placeholder to tell Safe that the Secret
-//       # is not initialized. DO NOT remove or change it.
-//       KEY_TXT: "e30="
+//	data:
+//	  # '{}' (e30=) is a special placeholder to tell Safe that the Secret
+//	  # is not initialized. DO NOT remove or change it.
+//	  KEY_TXT: "e30="
 //
 // 2. This approach is LESS secure, and it is meant to be used for LEGACY
 // systems where directly using the Safe Sidecar or Safe SDK are not feasible.
