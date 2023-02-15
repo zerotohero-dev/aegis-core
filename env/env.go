@@ -46,6 +46,9 @@ func SafeSvidPrefix() string {
 // (SPIFFE Verifiable Identity Document) used in the Aegis system.
 // The prefix is obtained from the environment variable AEGIS_NOTARY_SVID_PREFIX.
 // If the variable is not set, the default prefix is used.
+//
+// THIS IS NOT USED AT THE MOMENT.
+// IT IS EXPERIMENTAL.
 func NotarySvidPrefix() string {
 	p := os.Getenv("AEGIS_NOTARY_SVID_PREFIX")
 	if p == "" {
@@ -91,6 +94,8 @@ func SafeEndpointUrl() string {
 // NotaryEndpointUrl returns the URL for the Aegis Notary endpoint used in the
 // Aegis system. The URL is obtained from the environment variable
 // AEGIS_NOTARY_ENDPOINT_URL. If the variable is not set, the default URL is used.
+//
+// THIS IS NOT BEING USED. IT IS EXPERIMENTAL.
 func NotaryEndpointUrl() string {
 	u := os.Getenv("AEGIS_NOTARY_ENDPOINT_URL")
 	if u == "" {
@@ -243,7 +248,7 @@ func SafeSecretBufferSize() int {
 }
 
 // SafeBackingStore returns the storage type for the data,
-// as specified in the AEGIS_SAFE_BACKING_STORE_TYPE environment variable.
+// as specified in the AEGIS_SAFE_BACKING_STORE environment variable.
 // If the environment variable is not set, it defaults to "persistent".
 // Any value that is not "persistent" will mean Aegis Safe will store
 // its state in-memory
