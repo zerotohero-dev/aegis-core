@@ -18,6 +18,9 @@ type SecretUpsertRequest struct {
 	UseKubernetes bool              `json:"useKubernetes"`
 	Namespace     string            `json:"namespace"`
 	Value         string            `json:"value"`
+	Template      string            `json:"template"`
+	Format        string            `json:"format"`
+	Encrypt       bool              `json:"bool"`
 	Err           string            `json:"err,omitempty"`
 }
 
