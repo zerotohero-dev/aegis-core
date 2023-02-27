@@ -2,7 +2,7 @@
  * .-'_.---._'-.
  * ||####|(__)||   Protect your secrets, protect your business.
  *   \\()|##//       Secure your sensitive data with Aegis.
- *    \\ |#//                  <aegis.z2h.dev>
+ *    \\ |#//                  <aegis.ist>
  *     .\_/.
  */
 
@@ -18,7 +18,7 @@ import "os"
 func SentinelSvidPrefix() string {
 	p := os.Getenv("AEGIS_SENTINEL_SVID_PREFIX")
 	if p == "" {
-		p = "spiffe://aegis.z2h.dev/workload/aegis-sentinel/ns/aegis-system/sa/aegis-sentinel/n/"
+		p = "spiffe://aegis.ist/workload/aegis-sentinel/ns/aegis-system/sa/aegis-sentinel/n/"
 	}
 	return p
 }
@@ -31,7 +31,7 @@ func SentinelSvidPrefix() string {
 func SafeSvidPrefix() string {
 	p := os.Getenv("AEGIS_SAFE_SVID_PREFIX")
 	if p == "" {
-		p = "spiffe://aegis.z2h.dev/workload/aegis-safe/ns/aegis-system/sa/aegis-safe/n/"
+		p = "spiffe://aegis.ist/workload/aegis-safe/ns/aegis-system/sa/aegis-safe/n/"
 	}
 	return p
 }
@@ -46,7 +46,7 @@ func SafeSvidPrefix() string {
 func NotarySvidPrefix() string {
 	p := os.Getenv("AEGIS_NOTARY_SVID_PREFIX")
 	if p == "" {
-		p = "spiffe://aegis.z2h.dev/workload/aegis-notary/ns/aegis-system/sa/aegis-notary/n/"
+		p = "spiffe://aegis.ist/workload/aegis-notary/ns/aegis-system/sa/aegis-notary/n/"
 	}
 	return p
 }
@@ -58,7 +58,7 @@ func NotarySvidPrefix() string {
 func WorkloadSvidPrefix() string {
 	p := os.Getenv("AEGIS_WORKLOAD_SVID_PREFIX")
 	if p == "" {
-		p = "spiffe://aegis.z2h.dev/workload/"
+		p = "spiffe://aegis.ist/workload/"
 	}
 	return p
 }
