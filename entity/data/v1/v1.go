@@ -53,15 +53,24 @@ type SecretMeta struct {
 	Template string `json:"template"`
 	// Defaults to None
 	Format SecretFormat
-	// Defaults to false. If `true`, the secret needs to be encrypted using
-	// Aegis Safe Age Public Key beforehand.
-	Encrypted bool
 }
 
 type SecretStored struct {
-	Name    string
-	Value   string
-	Meta    SecretMeta
+	// Name of the secret.
+	Name string
+	// Raw value.
+	Value string
+	// Transformed value. This value is the value that workloads see.
+	//
+	// Apply transformation (if needed) and then store the value in
+	// one of the supported formats. If the format is json, ensure that
+	// a valid JSON is stored here. If the format is yaml, ensure that
+	// a valid YAML is stored here. If the format is none, then just
+	// apply transformation (if needed) and do not do any validity check.
+	ValueTransformed string `json:"valueTransformed"`
+	// Additional information that helps formatting and storing the secret.
+	Meta SecretMeta
+	// Timestamps
 	Created time.Time
 	Updated time.Time
 }
