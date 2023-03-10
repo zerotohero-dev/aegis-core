@@ -13,25 +13,25 @@ import (
 	"github.com/zerotohero-dev/aegis-core/log"
 )
 
+type Event string
+
+const EventEnter Event = "aegis-enter"
+const EventBadSvid Event = "aegis-bad-svid"
+const EventBrokenBody Event = "aegis-broken-body"
+const EventRequestTypeMismatch Event = "aegis-request-type-mismatch"
+const EventBadPeerSvid Event = "aegis-bad-peer-svid"
+const EventNoSecret Event = "aegis-no-secret"
+const EventOk Event = "aegis-ok"
+const EventNoWorkloadId Event = "aegis-no-workload-id"
+
 type JournalEntry struct {
 	CorrelationId string
 	Entity        any
 	Method        string
 	Url           string
 	Svid          string
-	Event         AuditEvent
+	Event         Event
 }
-
-type AuditEvent string
-
-const AuditEventEnter AuditEvent = "aegis-enter"
-const AuditEventBadSvid AuditEvent = "aegis-bad-svid"
-const AuditEventBrokenBody AuditEvent = "aegis-broken-body"
-const AuditEventRequestTypeMismatch AuditEvent = "aegis-request-type-mismatch"
-const AuditEventBadPeerSvid AuditEvent = "aegis-bad-peer-svid"
-const AuditEventNoSecret AuditEvent = "aegis-no-secret"
-const AuditEventOk AuditEvent = "aegis-ok"
-const AuditEventNoWorkloadId AuditEvent = "aegis-no-workload-id"
 
 func printAudit(correlationId, method, url, svid, message string) {
 	log.InfoLn(
