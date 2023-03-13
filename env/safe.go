@@ -157,9 +157,12 @@ func SafeAgeKeySecretName() string {
 }
 
 // SafeSecretNamePrefix returns the prefix to be used for the names of secrets that
-// Aegis Safe stores. The prefix is retrieved using the "AEGIS_SAFE_SECRET_NAME_PREFIX"
-// environment variable. If this variable is not set or is empty, the default value
-// "aegis-secret-" is returned.
+// Aegis Safe stores, when it is configured to persist the secrest in the Kubernetes
+// cluster as Kubernetes `Secret` objects.
+//
+// The prefix is retrieved using the "AEGIS_SAFE_SECRET_NAME_PREFIX"
+// environment variable. If this variable is not set or is empty, the default
+// value "aegis-secret-" is returned.
 func SafeSecretNamePrefix() string {
 	p := os.Getenv("AEGIS_SAFE_SECRET_NAME_PREFIX")
 	if p == "" {
