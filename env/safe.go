@@ -143,3 +143,15 @@ func SafeSvidRetrievalTimeout() time.Duration {
 	}
 	return time.Duration(i) * time.Millisecond
 }
+
+// SafeAgeKeySecretName returns the name of the environment variable that holds
+// the safe age key. The value is retrieved using the
+// "AEGIS_SAFE_AGE_KEY_SECRET_NAME" environment variable. If this variable is
+// not set or is empty, the default value "aegis-safe-age-key" is returned.
+func SafeAgeKeySecretName() string {
+	p := os.Getenv("AEGIS_SAFE_AGE_KEY_SECRET_NAME")
+	if p == "" {
+		p = "aegis-safe-age-key"
+	}
+	return p
+}
